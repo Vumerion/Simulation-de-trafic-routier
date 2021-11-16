@@ -1,19 +1,21 @@
-
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Véhicule {
-    int pos_x;
-    int pos_y;
-    double size;
-    int Speed = 0;
-    float Orientation = 0;
-    ImageView image_éclatée;
-    int arrivée_x;
-    int arrivée_y;
+    private int pos_x;
+    private int pos_y;
+    private double size;
+    private int Speed = 0;
+    private float Orientation = 0;
+    private ImageView image_éclatée;
+    private int arrivée_x;
+    private int arrivée_y;
+    private Boolean Priority;
+    private Map My_Universe; //La carte où est située la voiture.
 
-    public Véhicule(int pos_x, int pos_y, double size, int but_x, int but_y){
+    public Véhicule(int pos_x, int pos_y, double size, int but_x, int but_y, Map map){
+        this.My_Universe = map;
         this.pos_x = pos_x;
         this.pos_y = pos_y;
         this.size = size;
@@ -51,13 +53,43 @@ public class Véhicule {
         return this.pos_y;
     }
 
-    public void Vroumvroum(){
+    public void Avancer_Voiture(){
         this.pos_x = (int)this.Orientation*this.Speed;
         this.pos_y = (1-(int)this.Orientation)*this.Speed;
     }
 
     public ImageView GetVisual(){
-        return this.image_éclatée;
+        return this.image_éclatée; // Override this in inherited classes !
+    }
+
+    public void Rotate(int Rotation){
+        this.Orientation=this.Orientation+Rotation;
+    }
+
+    public void Accelerate(int Acceleration){
+        this.Speed=this.Speed+Acceleration;
+    }
+
+    public void Freiner(int Freinage){
+        this.Speed=this.Speed-Freinage;
+        Boolean S=this.Speed<=0;
+        if (S=true) {
+            this.Speed=0;
+        }
+    }
+
+    public void Démarrer(){
+        Boolean S=this.Speed<=0;
+        if (S=true){
+            this.Speed=1;
+        }
+    }
+
+    public void Set_Priority(Boolean Status){
+        this.Priority=Status;
+    }
+
+    public Boolean Get_Priority(){
+        return this.Priority;
     }
 }
-
