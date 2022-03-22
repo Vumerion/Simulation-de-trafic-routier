@@ -2,7 +2,7 @@
 
 To install the code on IntelliJ :
 
-Create a java project.
+Create a java project (NOT a JavaFx project), id est the basic type of project.
 Import the files.
 
 Download Javafx library.
